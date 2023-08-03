@@ -1,0 +1,19 @@
+bash
+
+#!/bin/bash
+
+# Set variables
+
+DATABASE_USER=${DATABASE_USER}
+
+DATABASE_NAME=${DATABASE_NAME}
+
+DATABASE_PASSWORD=${DATABASE_PASSWORD}
+
+NEW_MAX_CONNECTIONS=${NEW_MAX_CONNECTIONS}
+
+# Increase the max connections
+
+psql -U $DATABASE_USER -d $DATABASE_NAME -c "ALTER SYSTEM SET max_connections = $NEW_MAX_CONNECTIONS;"
+
+psql -U $DATABASE_USER -d $DATABASE_NAME -c "SELECT pg_reload_conf();"
